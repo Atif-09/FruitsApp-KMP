@@ -20,7 +20,7 @@ class ApiClass {
         }
     }
 
-   suspend fun githubUsers(): List<FruitsDataClassItem>{
+   suspend fun fruitsData(): List<FruitsDataClassItem>{
         val response = client.get("https://www.fruityvice.com/api/fruit/all")
        return response.body()
     }
