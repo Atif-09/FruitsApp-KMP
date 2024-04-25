@@ -6,11 +6,12 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
+    kotlin("plugin.serialization").version("1.9.22")
 }
 
 kotlin {
     @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
+ /*   wasmJs {
         moduleName = "composeApp"
         browser {
             commonWebpackConfig {
@@ -24,7 +25,7 @@ kotlin {
             }
         }
         binaries.executable()
-    }
+    }*/
     
     androidTarget {
         compilations.all {
@@ -53,6 +54,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.ui.tooling.preview)
             implementation(libs.androidx.activity.compose)
+            implementation("io.ktor:ktor-client-android:2.3.7")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -61,9 +63,16 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation("io.ktor:ktor-client-core:2.3.7")
+            implementation("io.ktor:ktor-client-content-negotiation:2.3.7")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.7")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation("io.ktor:ktor-client-java:2.3.7")
+        }
+        iosMain.dependencies {
+            implementation("io.ktor:ktor-client-darwin:2.3.7")
         }
     }
 }
@@ -114,6 +123,7 @@ compose.desktop {
     }
 }
 
+/*
 compose.experimental {
     web.application {}
-}
+}*/
