@@ -6,6 +6,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
+import model.FruitsDataClassItem
 
 
 class ApiClass {
@@ -19,9 +20,9 @@ class ApiClass {
         }
     }
 
-   suspend fun githubUsers(){
+   suspend fun githubUsers(): List<FruitsDataClassItem>{
         val response = client.get("https://www.fruityvice.com/api/fruit/all")
-
+       return response.body()
     }
 
 
